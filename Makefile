@@ -1,9 +1,10 @@
 
 
 subdirs = 1.1 \
-          1.3.1
+          1.3.1 \
+          1.9
 
-LATEST=1.3.1
+LATEST=1.9
 
 .PHONY: $(subdirs)
 
