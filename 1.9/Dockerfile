@@ -20,18 +20,12 @@ RUN yum install -y bzip2-devel \
                    ncurses-devel \
                    xz-devel \
                    zlib-devel && \
-    yum clean all && \
-    curl -L -o htslib-$VERSION.tar.gz https://github.com/samtools/htslib/archive/$VERSION.tar.gz && \
-    curl -L -o samtools-$VERSION.tar.gz https://github.com/samtools/samtools/archive/$VERSION.tar.gz && \
-    curl -L -o bcftools-$VERSION.tar.gz https://github.com/samtools/bcftools/archive/$VERSION.tar.gz && \
-    tar xzf bcftools-$VERSION.tar.gz && \ 
-    tar xzf htslib-$VERSION.tar.gz && \ 
-    tar xzf samtools-$VERSION.tar.gz && \
-    rm -rf bcftools-$VERSION.tar.gz &7 \
-    rm -rf htslib-$VERSION.tar.gz && \
-    rm -rf samtools-$VERSION.tar.gz && \
-    mv htslib-$VERSION htslib &7 \ 
-    cd bcftools-$VERSION &7 \
+    yum clean all && 
+RUN curl -L htslib-$VERSION.tar.gz https://github.com/samtools/htslib/archive/$VERSION.tar.gz | tar xz && \
+    curl -L -o samtools-$VERSION.tar.gz https://github.com/samtools/samtools/archive/$VERSION.tar.gz | tar xz && \
+    curl -L -o bcftools-$VERSION.tar.gz https://github.com/samtools/bcftools/archive/$VERSION.tar.gz | tar xz && \
+    mv htslib-$VERSION htslib && \ 
+    cd bcftools-$VERSION && \
     make -j HTSDIR=../htslib && \
     make prefix=$APPS/bcftools/$VERSION install && \
     cd .. && \
