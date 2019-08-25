@@ -21,9 +21,9 @@ RUN yum install -y bzip2-devel \
                    xz-devel \
                    zlib-devel && \
     yum clean all 
-RUN curl -L htslib-$VERSION.tar.gz https://github.com/samtools/htslib/archive/$VERSION.tar.gz | tar xz && \
-    curl -L -o samtools-$VERSION.tar.gz https://github.com/samtools/samtools/archive/$VERSION.tar.gz | tar xz && \
-    curl -L -o bcftools-$VERSION.tar.gz https://github.com/samtools/bcftools/archive/$VERSION.tar.gz | tar xz && \
+RUN curl -L https://github.com/samtools/htslib/archive/$VERSION.tar.gz | tar xz && \
+    curl -L https://github.com/samtools/samtools/archive/$VERSION.tar.gz | tar xz && \
+    curl -L https://github.com/samtools/bcftools/archive/$VERSION.tar.gz | tar xz && \
     mv htslib-$VERSION htslib && \ 
     cd bcftools-$VERSION && \
     make -j HTSDIR=../htslib && \
